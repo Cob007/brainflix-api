@@ -15,10 +15,9 @@ const writeToFile = (video) => {
   );
 };
 
-const updateFile = (_profile) => {
-  fs.writeFileSync("./data/profile.json", JSON.stringify(_profile));
+const updateFile = (_video) => {
+  fs.writeFileSync("./data/videos.json", JSON.stringify(_video));
 };
-
 
 
 router.post("/videos", (req, res) => {
@@ -27,8 +26,6 @@ router.post("/videos", (req, res) => {
     const profile = {
       ...reqBody,
       id: uniqueIdGenerator(),
-      channel: reqBody.channel,
-      description:reqBody.description,
       comments:[
         {
           id:uniqueIdGenerator(),
@@ -54,7 +51,6 @@ router.post("/videos", (req, res) => {
       image:'/images/image001.jpg', 
       likes: "12,000",
       timestamp: Date.now(),
-      title: reqBody.title,
       video: 'https://unit-3-project-api-0a5620414506.herokuapp.com/stream', 
       views: "1,200,200",
     };
@@ -68,7 +64,7 @@ router.post("/videos", (req, res) => {
 router.get("/videos/:id", (req, res) => {
   try {
     const id = req.params.id
-    let videosList = JSON.parse(readVideoFromFile())
+    const videosList = JSON.parse(readVideoFromFile())
     const video = videosList.find((_video) => _video.id === id)
     res.status(200).send(video)
   } catch (err){
@@ -78,7 +74,6 @@ router.get("/videos/:id", (req, res) => {
 
 router.get("/videos", (req, res) => {
   try {
-    const id = req.params.id
     let videosList = JSON.parse(readVideoFromFile())
     res.status(200).send(videosList)
   } catch (err){

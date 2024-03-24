@@ -12,7 +12,12 @@ const PORT = process.env.PORT || 8080;
 
 const videoRouter = require("./routes/videos");
 
-app.use("/api", videoRouter);
+app.use("/", videoRouter);
+
+app.use("/", (req, res) => {
+  res.json("Default page")
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
