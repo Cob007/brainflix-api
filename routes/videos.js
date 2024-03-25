@@ -51,7 +51,7 @@ router.post("/videos", (req, res) => {
       image:'/images/image001.jpg', 
       likes: "12,000",
       timestamp: Date.now(),
-      video: 'https://unit-3-project-api-0a5620414506.herokuapp.com/stream', 
+      video: '/videos/video001.mp4', 
       views: "1,200,200",
     };
     writeToFile(profile);
